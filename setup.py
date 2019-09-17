@@ -11,9 +11,10 @@ setup(
     long_description_content_type="text/markdown",
     install_requires=[
         "click==7.0",
+        "requests",
     ],
     entry_points={
-        "console_scripts": ["dgi=download_gitignore.download_gitignore:main"],
+        "console_scripts": ["dgi=download_gitignore.download_gitignore:download_gitignore"],
     },
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
