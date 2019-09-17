@@ -22,7 +22,7 @@ def get(language):
             language_gitignore_object = language_gitignore_object[0]
             url = language_gitignore_object["download_url"]
             click.echo(f"Downloading {language} .gitignore from {url}")
-            urllib.request.urlretrieve(url, "test.gitignore") # download file
+            urllib.request.urlretrieve(url, ".gitignore") # download file
         # else, the user typed the language wrong
         else:
             click.echo(f".gitignore not found for {language}")

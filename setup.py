@@ -1,4 +1,5 @@
 from setuptools import setup
+import setuptools
 
 setup(
     name="download-gitignore",
@@ -9,6 +10,7 @@ setup(
     author_email="victorcora98@gmail.com",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
+    packages=setuptools.find_packages(),
     install_requires=[
         "click==7.0",
         "requests==2.22.0",
@@ -20,6 +22,6 @@ setup(
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Console',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.7',
     ],
+    python_requires='>=3.5'
 )
