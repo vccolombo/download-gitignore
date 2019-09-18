@@ -3,14 +3,8 @@ from requests.exceptions import HTTPError
 import click
 import urllib.request
 
-@click.group()
-def download_gitignore():
-    pass
-
-@download_gitignore.command()
-@click.argument("language")
-def get(language):
-    language = language.capitalize() # first letter is upper case
+def _download_gitignore_file(language):
+    language = language.capitalize() # first letter must be upper case
 
     try:
         response = requests.get("https://api.github.com/repos/github/gitignore/contents").json()
@@ -32,7 +26,23 @@ def get(language):
     except Exception as err:
         print(f'Other error occurred: {err}') 
 
+@click.group()
+def download_gitignore():
+    pass
+
+
+@download_gitignore.command()
+@click.argument("language")  
+def download(language):
+    _download_gitignore_file(language)
     
+
+# download alias
+@download_gitignore.command()
+@click.argument("language")
+def get(language):
+    _download_gitignore_file(language)
+ 
 
 def main():
     try:
