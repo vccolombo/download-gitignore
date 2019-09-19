@@ -26,7 +26,8 @@ def _download_gitignore_file(language):
             urllib.request.urlretrieve(url, ".gitignore") # download file
         # else, the user typed the language wrong
         else:
-            click.echo(f".gitignore not found for {language}")
+            click.echo(f""".gitignore not found for {language}. 
+                Use download-gitignore list to list all the available files.""")
                 
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
@@ -53,20 +54,14 @@ def get(language):
 
 @download_gitignore.command()
 def list():
-    click.echo("List of all .gitignore files available to download:\n")
+    click.echo("Getting list of .gitignore files...")
     list_of_gitignore_files = _get_list_of_gitignore_files()
+    click.echo("List of all .gitignore files available to download:\n")
     for f in list_of_gitignore_files:
         click.echo(f["name"])
 
 def main():
-    try:
-        response = requests.get("https://api.github.com/repos/github/gitignore/contents")
-
-        print(response.text)
-    except HTTPError as http_err:
-        print(f'HTTP error occurred: {http_err}')
-    except Exception as err:
-        print(f'Other error occurred: {err}') 
+    pass
     
     
 if __name__ == '__main__':
