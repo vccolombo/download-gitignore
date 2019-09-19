@@ -3,14 +3,21 @@ from requests.exceptions import HTTPError
 import click
 import urllib.request
 
+def _get_list_of_gitignore_files():
+    response = requests.get("https://api.github.com/repos/github/gitignore/contents").json()
+    list_of_gitignore_files = [obj for obj in response 
+        if obj["type"] == "file" and ".gitignore" in obj["name"]]
+    return list_of_gitignore_files
+
 def _download_gitignore_file(language):
     language = language.capitalize() # first letter must be upper case
 
     try:
-        response = requests.get("https://api.github.com/repos/github/gitignore/contents").json()
+        list_of_gitignore_files = _get_list_of_gitignore_files()
 
-        # get a list with all files that are named <language>.gitignore in the repo
-        language_gitignore_object = [obj for obj in response if obj["name"] == language + ".gitignore"]
+        # get a list with all (the only) files that are named <language>.gitignore in the repo
+        language_gitignore_object = [obj for obj in list_of_gitignore_files 
+            if obj["name"] == language + ".gitignore"]
         # if this list is not empty, download the file
         if len(language_gitignore_object) != 0:
             language_gitignore_object = language_gitignore_object[0]
@@ -42,7 +49,14 @@ def download(language):
 @click.argument("language")
 def get(language):
     _download_gitignore_file(language)
- 
+
+
+@download_gitignore.command()
+def list():
+    click.echo("List of all .gitignore files available to download:\n")
+    list_of_gitignore_files = _get_list_of_gitignore_files()
+    for f in list_of_gitignore_files:
+        click.echo(f["name"])
 
 def main():
     try:
