@@ -7,7 +7,7 @@ A Python CLI program to download .gitignore files from [Github's repository](htt
 **download-gitignore requires** that you have installed in your machine:
 
 * Python >= 3.5
-* Pip3 
+* Pip3
 
 Run the following command to **install download-gitignore**:
 
@@ -30,4 +30,11 @@ download-gitignore download python
 You can also use `dgi`as an alias for `download-gitignore`:
 ```console
 dgi download c++
+```
+
+### List all available .gitignore files
+Use the command `download-gitignore list` to list all available .gitignore files to download:
+
+```console
+download-gitignore list
 ```
