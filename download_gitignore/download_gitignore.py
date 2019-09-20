@@ -1,5 +1,5 @@
 import click
-from github_api import github_api
+from .github_api import github_api
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
