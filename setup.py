@@ -3,7 +3,7 @@ import setuptools
 
 setup(
     name="download-gitignore",
-    version="0.3",
+    version="1.0",
     description="A Python CLI program to download .gitignore files from Github's repository",
     url="https://github.com/vccolombo/download-gitignore",
     author="Víctor Cora Colombo",
@@ -20,9 +20,11 @@ setup(
             "download-gitignore=download_gitignore.download_gitignore:download_gitignore"],
     },
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: MIT License',
+        'Topic :: Software Development :: Version Control :: Git'
     ],
     python_requires='>=3.5'
 )
