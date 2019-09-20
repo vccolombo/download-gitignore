@@ -11,6 +11,7 @@ class github_api:
         return list_of_gitignore_files
 
     def download_gitignore_file(self, language):
+        click.echo("Trying to download .gitignore file...\n")
         language = language.capitalize() # first letter must be upper case
 
         try:
@@ -23,14 +24,15 @@ class github_api:
             if len(language_gitignore_object) != 0:
                 language_gitignore_object = language_gitignore_object[0]
                 url = language_gitignore_object["download_url"]
-                click.echo(f"Downloading {language} .gitignore from {url}")
+                click.echo("Downloading " + language + " .gitignore from " + url)
                 urllib.request.urlretrieve(url, ".gitignore") # download file
+                click.echo("Download successful")
             # else, the user typed the language wrong
             else:
-                click.echo(f""".gitignore not found for {language}. Use download-gitignore list to list all the available files.""")
+                click.echo(".gitignore not found for " + language + ". Use download-gitignore list to list all the available files.")
                     
         except HTTPError as http_err:
-            click.echo(f'HTTP error occurred: {http_err}')
+            click.echo("HTTP error occurred: " + http_err)
         except Exception as err:
-            click.echo(f'Other error occurred: {err}') 
+            click.echo("Other error occurred: " + err) 
             click.echo("\nYou may want to check your internet connection.")
