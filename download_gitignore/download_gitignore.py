@@ -26,33 +26,36 @@ def _download_gitignore_file(language):
             urllib.request.urlretrieve(url, ".gitignore") # download file
         # else, the user typed the language wrong
         else:
-            click.echo(f""".gitignore not found for {language}. 
-                Use download-gitignore list to list all the available files.""")
+            click.echo(f""".gitignore not found for {language}. Use download-gitignore list to list all the available files.""")
                 
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
     except Exception as err:
         print(f'Other error occurred: {err}') 
+        click.echo("\nYou may want to check your internet connection.")
 
-@click.group()
+
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+
+@click.group(context_settings=CONTEXT_SETTINGS)
 def download_gitignore():
-    pass
+    """Tool to download .gitignore files from command line"""
 
 
-@download_gitignore.command()
+@download_gitignore.command("download", short_help="Download .gitignore file for LANGUAGE")
 @click.argument("language")  
 def download(language):
     _download_gitignore_file(language)
     
 
 # download alias
-@download_gitignore.command()
+@download_gitignore.command("get", short_help="Download .gitignore file for LANGUAGE")
 @click.argument("language")
 def get(language):
     _download_gitignore_file(language)
 
 
-@download_gitignore.command()
+@download_gitignore.command("list", short_help="List all .gitignore files available to download")
 def list():
     click.echo("Getting list of .gitignore files...")
     list_of_gitignore_files = _get_list_of_gitignore_files()
