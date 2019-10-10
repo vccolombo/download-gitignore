@@ -12,19 +12,18 @@ class github_api:
 
     def download_gitignore_file(self, language):
         click.echo("Trying to download .gitignore file...\n")
-        language = language.capitalize() # first letter must be upper case
 
         try:
             list_of_gitignore_files = self.get_list_of_gitignore_files()
 
             # get a list with all (the only) files that are named <language>.gitignore in the repo
             language_gitignore_object = [obj for obj in list_of_gitignore_files 
-                if obj["name"] == language + ".gitignore"]
+                if obj["name"].lower() == language.lower() + ".gitignore"]
             # if this list is not empty, download the file
             if len(language_gitignore_object) != 0:
                 language_gitignore_object = language_gitignore_object[0]
                 url = language_gitignore_object["download_url"]
-                click.echo("Downloading " + language + " .gitignore from " + url)
+                click.echo("Downloading " + language_gitignore_object["name"] + " from " + url)
                 urllib.request.urlretrieve(url, ".gitignore") # download file
                 click.echo("Download successful")
             # else, the user typed the language wrong
