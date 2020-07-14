@@ -37,6 +37,12 @@ You can also use `dgi`as an alias for `download-gitignore`:
 dgi download c++
 ```
 
+**New in 2.0.0**: Now you can download more than one gitignore file at the same time:
+
+```console
+download-gitignore download c c++
+```
+
 ### List all available .gitignore files
 
 Use the command `download-gitignore list` to list all available .gitignore files to download:
