@@ -8,17 +8,17 @@ def download_gitignore():
     """Tool to download .gitignore files from command line"""
 
 
-@download_gitignore.command("download", short_help="Download .gitignore file for LANGUAGE")
-@click.argument("language")  
-def download(language):
-    github_api().download_gitignore_file(language)
+@download_gitignore.command("download", short_help="Download .gitignore file for LANGUAGES")
+@click.argument("languages",nargs=-1)  
+def download(languages):
+    github_api().download_gitignore_file(languages)
     
 
 # download alias
-@download_gitignore.command("get", short_help="Download .gitignore file for LANGUAGE")
-@click.argument("language")
-def get(language):
-    github_api().download_gitignore_file(language)
+@download_gitignore.command("get", short_help="Download .gitignore file for LANGUAGES")
+@click.argument("languages",nargs=-1)
+def get(languages):
+    github_api().download_gitignore_file(languages)
 
 
 @download_gitignore.command("list", short_help="List all .gitignore files available to download")
