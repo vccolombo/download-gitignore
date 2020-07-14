@@ -24,7 +24,7 @@ class github_api:
                     click.echo('.gitignore not found for {}. Use download-gitignore list to list all the available files'.format(lang))
                     return
 
-            # get a list with all (the only) files that are named <language>.gitignore in the repo
+            # get a list with all files to download
             language_gitignore_objects = [obj for obj in list_of_gitignore_files
                 if obj["name"].lower() in user_gitignore_names]
             # if this list is not empty, download the files
