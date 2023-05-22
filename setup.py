@@ -12,7 +12,7 @@ setup(
     packages=setuptools.find_packages(),
     install_requires=[
         "click==7.0",
-        "requests==2.22.0",
+        "requests==2.31.0",
     ],
     entry_points={
         "console_scripts": ["dgi=download_gitignore.download_gitignore:download_gitignore",
